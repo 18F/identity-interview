@@ -1,0 +1,27 @@
+<%= form_with(method: :post) do |form| %>
+  <%= form.label :count, 'Number of items' %>
+  <%= form.text_field :count, value: 5 %>
+
+  <%= form.hidden_field :random, value: true %>
+  <%= form.submit 'Create random TODOs' %>
+<% end %>
+
+<%= form_with(method: :get) do |form| %>
+  <%= form.label :order, 'Order by' %>
+  <%= form.select :order, [['due at', 'due_at'], ['created at', 'created_at']], selected: @order_by %>
+  <%= form.submit 'Sort' %>
+<% end %>
+
+<ul>
+  <% @todos.each do |todo| %>
+    <li>
+      <%= todo.title %>
+      (due
+      <%= time_ago_in_words(todo.due_at) %>
+      <%= todo.due_at.past? ? 'ago' : 'from now' %>)
+      (created
+      <%= time_ago_in_words(todo.created_at) %>
+      <%= todo.created_at.past? ? 'ago' : 'from now' %>)
+    </li>
+  <% end %>
+</ul
