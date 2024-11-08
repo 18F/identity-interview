@@ -1,24 +1,29 @@
-# README
+# identity-interview
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A sample Rails application that can be used for interviews, it
+may have bugs in it that are intended to be examples of what to fix
 
-Things you may want to cover:
+> [!NOTE]
+> Please do not contribute bug fixes as pull requests to this repository!
 
-* Ruby version
+## Setup
 
-* System dependencies
+This application uses SQLite as its database, so it should be fairly easy to run locally
 
-* Configuration
+```bash
+bundle install
+bundle exec rake db:migrate
+```
 
-* Database creation
+## Running the application
 
-* Database initialization
+```bash
+bundle exec rails server
+```
 
-* How to run the test suite
+## Running tests
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+bundle exec rspec
+```
 
-* Deployment instructions
-
-* ...
