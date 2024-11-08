@@ -4,22 +4,25 @@ class Todo < ApplicationRecord
   # @param count [Integer] number of Todos to create
   # @return [nil]
   def self.create_random(count:)
+    todos = []
+
     (count - 1).times do
-      build_random.save
+      todos << build_random
     end
-    build_random(due_at: nil).save
-    nil
+    todos << build_random(include_due_date: false)
+    todos.map(&:save)
+    todos
   end
 
   # Builds a randomized Todo
-  # @param due_at [Boolean] whether or not to set a due date
+  # @param include_due_date [Boolean] whether or not to set a due date
   # @return [Todo]
-  def self.build_random(due_at: true)
+  def self.build_random(include_due_date: true)
     verb = %w[create remove fix discover research].sample
     noun = %w[taco burrito banana smoothie fries salad].sample
 
     new(
-      due_at: due_at ? rand(-10..10).days.from_now : nil,
+      due_at: include_due_date ? rand(-10..10).days.from_now : nil,
       title: "#{verb} #{noun}",
     )
   end
